@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KMPay Monitor Dashboard</title>
+  <meta name="description" content="Live dashboard for KMPay monitoring bot — cycle status, balances, and phone accounts." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div class="bg-grid"></div>
+
+  <div class="container">
+
+    <!-- ── HEADER ── -->
+    <header class="header" id="header">
+      <div class="header-top">
+        <div class="live-badge" id="live-badge">
+          <span class="live-dot" id="live-dot"></span>
+          <span id="live-label">CONNECTING</span>
+        </div>
+        <span class="brand-label">KMPAY MONITOR</span>
+      </div>
+      <div class="cycle-number" id="cycle-number">—</div>
+      <div class="timestamp" id="timestamp">Loading...</div>
+    </header>
+
+    <!-- ── SERVICE STATUS ── -->
+    <div class="card" id="card-services">
+      <div class="card-title">▌ SERVICE STATUS</div>
+      <div class="card-body services-body">
+        <div class="service-row">
+          <span class="service-label">saveOpt</span>
+          <span class="service-status" id="status-saveopt">—</span>
+        </div>
+        <div class="service-row">
+          <span class="service-label">phoneAuth</span>
+          <span class="service-status" id="status-phoneauth">—</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── HOMEPAGE ── -->
+    <div class="card" id="card-homepage">
+      <div class="card-title">▌ HOMEPAGE</div>
+      <div class="card-body">
+        <div class="data-row">
+          <span class="data-label">Deposit</span>
+          <span class="data-value" id="hp-deposit">—</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Wallet Total Balance</span>
+          <span class="data-value" id="hp-wallet">—</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Total Balance</span>
+          <span class="data-value highlight" id="hp-total">—</span>
+        </div>
+        <div class="row-divider"></div>
+        <div class="data-row">
+          <span class="data-label">Income</span>
+          <span class="data-value accent" id="hp-income">—</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── INDEX INFO ── -->
+    <div class="card" id="card-index">
+      <div class="card-title">▌ INDEX INFO</div>
+      <div class="card-body">
+        <div class="data-row">
+          <span class="data-label">Individual Earnings</span>
+          <span class="data-value" id="idx-self-income">—</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Team Earnings</span>
+          <span class="data-value" id="idx-team-income">—</span>
+        </div>
+        <div class="row-divider"></div>
+        <div class="data-row">
+          <span class="data-label">Personal Orders</span>
+          <span class="data-value" id="idx-self-orders">—</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Team Orders</span>
+          <span class="data-value" id="idx-team-orders">—</span>
+        </div>
+        <div class="row-divider"></div>
+        <div class="data-row">
+          <span class="data-label">Personal Accounts</span>
+          <span class="data-value" id="idx-self-acc">—</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Team Accounts</span>
+          <span class="data-value" id="idx-team-acc">—</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PHONE ACCOUNTS ── -->
+    <div class="card" id="card-phones">
+      <div class="card-title">▌ PHONE ACCOUNTS</div>
+      <div class="card-body" id="phone-accounts-list">
+        <div class="loading-state">Waiting for first cycle...</div>
+      </div>
+    </div>
+
+    <!-- ── REFRESH BAR ── -->
+    <div class="refresh-bar">
+      <div class="refresh-info">
+        <span id="refresh-label">Next refresh in <b id="countdown">55</b>s</span>
+        <button class="refresh-btn" id="refresh-btn" onclick="fetchNow()">↻ Refresh</button>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+    </div>
+
+    <!-- ── ERROR BANNER ── -->
+    <div class="error-banner" id="error-banner" style="display:none">
+      ⚠ Cannot reach the backend. Check your Railway deployment or API URL.
+    </div>
+
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
