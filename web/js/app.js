@@ -3,7 +3,7 @@
 // Example: "https://kmpay-monitor.up.railway.app"
 const RAILWAY_URL = "https://koneba-production.up.railway.app";
 const API_URL = `${RAILWAY_URL}/status`;
-const REFRESH_SECS = 55;   // match bot INTERVAL (50s) + small buffer
+const REFRESH_SECS = 35;   // match bot INTERVAL (30s) + small buffer
 
 // ─── STATE ──────────────────────────────────────────────────────────────────
 let countdown = REFRESH_SECS;
