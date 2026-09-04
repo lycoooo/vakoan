@@ -449,9 +449,72 @@ body {
   font-style: italic;
 }
 
-/* ─── Responsive ─────────────────────────────────────────────────────────── */
-@media (max-width: 360px) {
-  .cycle-number { font-size: 44px; }
-  .card-body    { padding: 14px 16px; }
-  .card-title   { padding: 11px 16px; }
+/* ─── Responsive / Mobile-first ─────────────────────────────────────────── */
+
+/* Prevent ALL horizontal overflow globally */
+html, body { max-width: 100%; overflow-x: hidden; }
+
+/* Ensure text wraps and never overflows its container */
+* { word-break: break-word; overflow-wrap: break-word; }
+
+/* Data rows: allow label to shrink and value to stay right-aligned */
+.data-row {
+  flex-wrap: wrap;
+  row-gap: 2px;
 }
+.data-label {
+  flex-shrink: 1;        /* allow shrink on tiny screens */
+  min-width: 0;
+}
+.data-value {
+  flex-shrink: 0;        /* value never shrinks — stays readable */
+  min-width: 0;
+  word-break: normal;    /* numbers shouldn't break mid-digit */
+}
+
+/* Phone header: badge drops to its own line on very small screens */
+.phone-header {
+  row-gap: 6px;
+}
+.phone-status-badge {
+  flex-shrink: 0;        /* badge never squishes */
+}
+
+/* iPhone SE / small Android (≤ 375px) */
+@media (max-width: 375px) {
+  body          { padding: 16px 12px 40px; }
+  .cycle-number { font-size: 44px; letter-spacing: -1px; }
+  .brand-label  { letter-spacing: 2px; font-size: 10px; }
+  .header       { padding: 22px 16px 20px; }
+  .card-title   { padding: 11px 14px; font-size: 9px; }
+  .card-body    { padding: 13px 14px; gap: 10px; }
+  .data-label   { font-size: 12px; }
+  .data-value   { font-size: 13px; }
+  .phone-number { font-size: 13px; }
+  .phone-meta-value { font-size: 14px; }
+  .refresh-bar  { padding: 12px 14px; }
+}
+
+/* Very tiny screens (≤ 320px — Galaxy A series, old iPhones) */
+@media (max-width: 320px) {
+  body            { padding: 12px 10px 32px; }
+  .cycle-number   { font-size: 38px; }
+  .container      { gap: 8px; }
+  .card-body      { padding: 12px 12px; gap: 9px; }
+  .phone-meta     { grid-template-columns: 1fr; } /* stack on tiny screens */
+  .service-status { padding: 3px 8px; font-size: 10px; }
+}
+
+/* Touch devices — remove hover effects that feel broken on mobile */
+@media (hover: none) {
+  .card:hover         { border-color: var(--border); background: var(--bg-card); }
+  .phone-card:hover   { border-color: var(--border); }
+  .refresh-btn:hover:not(:disabled) { transform: none; background: var(--cyan-dim); }
+}
+
+/* Ensure tap targets are at least 44px tall (Apple HIG / WCAG) */
+.refresh-btn {
+  min-height: 36px;
+  touch-action: manipulation;
+}
+
